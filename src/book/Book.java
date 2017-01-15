@@ -1,5 +1,8 @@
 package book;
+import book.entities.Lexeme;
 import book.entities.Paragraph;
+import book.entities.Sentence;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +27,22 @@ public class Book {
     public String toString(){
         // Returns the name of book, file path, general statistics of
         // how many paragraphs/sentences/words this book contains
-        return name + "\n" + fileNameFull + "\nNr.of Paragraphs:" + paragraphs.size();
+        StringBuilder bookText = new StringBuilder();
+        for (Paragraph p: this.getParagraphs()) {
+            List<Sentence> sentences = p.getSentences();
+            for (Sentence s : sentences) {
+                String lastLexeme="";
+                for (Lexeme l : s.getLexemes()) {
+                    bookText.append(lastLexeme + (l.isWord() ? " " : ""));
+                    lastLexeme = l.toString();
+                }
+                bookText.delete(0,1).append(lastLexeme);
+            }
+        }
+        return bookText.toString();
+        //        return name + "\n" + fileNameFull + "\nNr.of Paragraphs:" + paragraphs.size();
+
+
     }
 
     public String getFileName(){
