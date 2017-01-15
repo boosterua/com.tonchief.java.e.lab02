@@ -12,6 +12,7 @@ import java.util.List;
 
 public class Book {
     private Reader reader;
+
     private String bookRawText;
     private List<Paragraph> paragraphs = new ArrayList<>();
 
@@ -23,10 +24,13 @@ public class Book {
         this.name = name;
     }
 
+    Book(String rawText){
+        this.bookRawText = rawText;
+    }
+
     @Override
     public String toString(){
-        // Returns the name of book, file path, general statistics of
-        // how many paragraphs/sentences/words this book contains
+
         StringBuilder bookText = new StringBuilder();
         for (Paragraph p: this.getParagraphs()) {
             List<Sentence> sentences = p.getSentences();
@@ -40,9 +44,13 @@ public class Book {
             }
         }
         return bookText.toString();
-        //        return name + "\n" + fileNameFull + "\nNr.of Paragraphs:" + paragraphs.size();
+    }
 
-
+    public String getBookDetails(){
+        // Returns the name of book, file path, general statistics of
+        // how many paragraphs/sentences/words this book contains
+        return name + "\n" + fileNameFull + "\n"+
+                "Nr.of Paragraphs:" + paragraphs.size();
     }
 
     public String getFileName(){
@@ -59,14 +67,18 @@ public class Book {
         }
     }
 
-
     public void parse() {
         Parser parser = new Parser(bookRawText);
         // split into paragraphs
-        this.paragraphs = parser.extractParagraphs();
+        this.paragraphs = parser.extractParagraphs();        //System.out.println(paragraphs.size());
     }
 
     public List<Paragraph> getParagraphs(){
         return paragraphs;
     }
+
+    public void setBookRawText(String bookRawText) {
+        this.bookRawText = bookRawText;
+    }
+
 }

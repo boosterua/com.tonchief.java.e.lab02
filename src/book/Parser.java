@@ -55,7 +55,8 @@ public class Parser {
             p = new Paragraph();
             pp.add(p);
 
-            String[] sentences = paragraph.split("(?<=[!?.])[.!?]*\\s*");
+            String[] sentences = paragraph.split("(?<=[!?.])[.!?]*\\s+");// (1/15) put: + insteadOf * ,
+                                                                            // otherwise get errors in code listing like subclasses calls (A.class)
             for ( String str : sentences) {
                 p.addSentence(pushLexemesToSentence( str.replaceAll("[\\n\\r]","")) );
             }

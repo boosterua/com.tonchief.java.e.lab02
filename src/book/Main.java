@@ -43,7 +43,9 @@ public class Main {
         book.read();
         book.parse();
         System.out.println(book);
+
         Task02(book);
+
         Task16(book,7, "I won't explain the details of the rest of the code " +
                 "other than to say that you can probably figure it out by walking through it.",
                 "/***999***/");
@@ -59,13 +61,20 @@ public class Main {
     }
 
 
+
+
+
+
+
+
+
     // 2.*	Вывести все предложения заданного текста в порядке возрастания количества слов в каждом из них.
 
-    public static void Task02(Book book){
+    public static String Task02(Book book){
         HashMap<String, Integer> map = new HashMap<>();
         ValueComparator bvc = new ValueComparator(map);
         TreeMap<String, Integer> sentencesSortedByNrWords = new TreeMap<>(bvc);
-
+        StringBuilder resultString = new StringBuilder(); // for testing only
 
         for (Paragraph p: book.getParagraphs()){
             List <Sentence> sentences = p.getSentences();
@@ -76,11 +85,13 @@ public class Main {
 
         PrintWriter out = null;
         try {
-            out = new PrintWriter("output02.txt");
+            String outputFileName = book.getFileName().replaceAll(".*/","").replaceAll("[^a-zA-Z0-9\\-_]","");
+            out = new PrintWriter("~OUT02~" + outputFileName + ".txt");
             for(Map.Entry<String,Integer> entry: sentencesSortedByNrWords.entrySet()){
                 String sentence = entry.getKey();
                 Integer length = entry.getValue();
                 out.print(sentence+"\n");
+                resultString.append(sentence+"\n");
                 //System.out.println(sentence);
             }
 
@@ -93,16 +104,18 @@ public class Main {
                     e.printStackTrace();
                 }
             }
+        return ""+resultString;
     }
 
 
 
     // 16.* В некотором предложении текста слова заданной длины заменить указанной подстрокой, длина которой может не совпадать с длиной слова.
 
-    public static void Task16(Book book, int length, String sentence, String substring){
+    public static String Task16(Book book, int length, String sentence, String substring){
 
         Sentence targetSentence = new Parser("").pushLexemesToSentence(sentence);
         int sentenceLength = targetSentence.getNumWords();
+        String resultString = null;
 
         for (Paragraph p: book.getParagraphs()){
             List <Sentence> sentences = p.getSentences();
@@ -115,6 +128,7 @@ public class Main {
                             w.update(substring);
                     }
                     System.out.println("RES: "+s);
+                    resultString = s.toString();
                 }
             }
         }
@@ -135,7 +149,7 @@ public class Main {
                 e.printStackTrace();
             }
         }
-
+        return resultString;
     }
 
 }
