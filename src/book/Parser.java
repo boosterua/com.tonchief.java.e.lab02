@@ -57,7 +57,7 @@ public class Parser {
 
             String[] sentences = paragraph.split("(?<=[!?.])[.!?]*\\s*");
             for ( String str : sentences) {
-                p.addSentence(pushLexemesToSentence( str.replaceAll("[\\n\\r]","-")) );
+                p.addSentence(pushLexemesToSentence( str.replaceAll("[\\n\\r]","")) );
             }
         }
 
