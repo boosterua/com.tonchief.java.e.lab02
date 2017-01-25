@@ -1,4 +1,4 @@
-package book;
+package book.utils;
 
 import book.entities.*;
 
@@ -17,7 +17,7 @@ public class Parser {
 
     public Parser(String text){
         // read file
-        this.text = text;
+        this.text = text == null? "" : text;
     }
 
     public String getText(String inputText){
@@ -47,21 +47,21 @@ public class Parser {
         // 0.21s for 2.7 Mb file with 30640 paragraphs
         //      String [] paragraphs = text.split("(\n\r?){2,}|(?<=[!?.])(\n\r?)");
 
-        String [] paragraphs = text.split("(\n\r?){2,}|(?<=[!?.])(\n\r?)");
+        if (text.length()==0) return pp;
+        String [] paragraphs =  text.split("(\n\r?){2,}|(?<=[!?.])(\n\r?)");
+        System.out.println("text len:" + text.length() +"--"+ paragraphs.length);
         Matcher match;
 
         for(String paragraph: paragraphs){     //"(?<=;)"
-                                                // ((?<=;)|(?=;)) equals to select an empty character before ; or after ;.
+                                               // ((?<=;)|(?=;)) equals to select an empty character before ; or after ;.
             p = new Paragraph();
             pp.add(p);
-
             String[] sentences = paragraph.split("(?<=[!?.])[.!?]*\\s+");// (1/15) put: + insteadOf * ,
-                                                                            // otherwise get errors in code listing like subclasses calls (A.class)
+                                                                           // otherwise get errors in code listing like subclasses calls (A.class)
             for ( String str : sentences) {
-                p.addSentence(pushLexemesToSentence( str.replaceAll("[\\n\\r]","")) );
+                p.addSentence(pushLexemesToSentence(str.replaceAll("[\\n\\r]", "")));
             }
         }
-
         return pp;
     }
 
@@ -75,5 +75,4 @@ public class Parser {
         }
         return sentence;
     }
-
 }

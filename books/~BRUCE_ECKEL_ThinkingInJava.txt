@@ -9,6 +9,8 @@ New York ● Toronto ● Montreal ● London ● Munich ● Paris
 Madrid ● Capetown ● Sydney ● Tokyo ● Singapore ● Mexico City
 
 
+/test: main.method(); new Object(with param);
+
 Introduction
 to Objects
 “We cut nature up, organize it into concepts, and ascribe significances

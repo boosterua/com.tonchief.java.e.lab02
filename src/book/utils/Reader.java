@@ -1,4 +1,6 @@
-package book;
+package book.utils;
+import book.Book;
+
 import java.io.*;
 import java.util.Objects;
 
@@ -23,7 +25,7 @@ public class Reader {
         }
 
 
-        void read() throws IOException {
+        public void read() throws IOException {
             if (!file.exists()) {
                 throw new IllegalArgumentException(String.format("Specified source file '%s' does not exist!", file.getAbsolutePath()));
             }

@@ -11,6 +11,8 @@ Bruce Eckel
 President, MindView, Inc.
 
 
+/test: main.method(); new Object(with param);
+
 
 
 Generics 
@@ -24,13 +26,13 @@ across more types, this rigidity can be overconstraining. 1
 One way that object-oriented languages allow generalization is through polymorphism. You 
 can write (for example) a method that takes a base class object as an argument, and then use 
 that method with any class derived from that base class. Now your method is a little more 
-general and can be used in more places. The same is true within classes— anyplace you use a 
+general and can be used in more places. The same is true within classesï¿½ anyplace you use a 
 specific type, a base type provides more flexibility. Of course, anything but a final class 2 can 
 be extended, so this flexibility is automatic much of the time. 
 
 Sometimes, being constrained to a single hierarchy is too limiting. If a method argument is 
 an interface instead of a class, the limitations are loosened to include anything that 
-implements the interface— including classes that haven't been created yet. This gives the 
+implements the interfaceï¿½ including classes that haven't been created yet. This gives the 
 client programmer the option of implementing an interface in order to conform to your class 
 or method. So interfaces allow you to cut across class hierarchies, as long as you have the 
 option to create a new class in order to do so. 
@@ -45,7 +47,7 @@ implement the concept of parameterized types, which allow multiple types. The te
 generics in programming languages was to allow the programmer the greatest amount of 
 expressiveness possible when writing classes or methods, by loosening the constraints on the 
 types that those classes or methods work with. As you will see in this chapter, the Java 
-implementation of generics is not that broad reaching— indeed, you may question whether 
+implementation of generics is not that broad reachingï¿½ indeed, you may question whether 
 the term "generic" is even appropriate for this feature. 
 
 If you've never seen any kind of parameterized type mechanism before, Java generics will 

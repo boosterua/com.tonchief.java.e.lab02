@@ -10,6 +10,24 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class MainTest {
 
+
+    @Test
+    void bookNull() {
+        System.out.println("Book class tests*");
+        Book book = new Book(null);
+        book.parse();
+        assertEquals("", book.toString());
+    }
+
+    @Test
+    void bookNonExisting() {
+        System.out.println("Book class tests /Doesn't exist!/*");
+        Book book = new Book("", "notExisiting.file");
+        book.parse();
+        assertEquals("", book.toString());
+    }
+
+
     String text = "What Are Regular Expressions?\n" +
             "\n" +
             "Regular expressions are a way to describe a set of strings based on common characteristics shared by each string in the set. They can be used to search, edit, or manipulate text and data. You must learn a specific syntax to create regular expressions — one that goes beyond the normal syntax of the Java programming language. Regular expressions vary in complexity, but once you understand the basics of how they're constructed, you'll be able to decipher (or create) any regular expression.\n" +
@@ -59,7 +77,7 @@ class MainTest {
         System.out.println("Task02*");
         Book book = new Book(text);
         book.parse();
-        String result = Main.Task02(book);
+        String result = Book.Task02(book);
         assertEquals(textSortedByNrWords, result);
         int nrWordsLast = 0;
         for (String line: textSortedByNrWords.split("\n")){
@@ -82,9 +100,12 @@ class MainTest {
         String sentence = "You obtain a Matcher object by invoking the matcher method on a Pattern object.";
         String substring = "[##_6_chars_Replaced_##]";
 
-        String result = Main.Task16(book, length, sentence, substring);
-        String sentenceExpected = "You [##_6_chars_Replaced_##] a Matcher [##_6_chars_Replaced_##] by invoking the matcher [##_6_chars_Replaced_##] on a Pattern [##_6_chars_Replaced_##].";
+        String result = Book.Task16(book, length, sentence, substring);
+        String sentenceExpected = "You [##_6_chars_Replaced_##] a Matcher [##_6_chars_Replaced_##] " +
+                "by invoking the matcher [##_6_chars_Replaced_##] on a Pattern [##_6_chars_Replaced_##].";
         System.out.println(book.toString());
         assertEquals(sentenceExpected, result);
     }
+
+
 }
